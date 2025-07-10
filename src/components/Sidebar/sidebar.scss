@@ -1,44 +1,115 @@
-.sidebar{
+.sidebar {
     position: fixed;
-    height: 95%;
-    min-width: 15%;
-    padding: 1rem;
-    margin: 1rem;
+    height: 100dvh;
+    min-width: 20%;
     border: solid 3px;
     border-radius: 15px;
+
+    &_dist {
+        margin: 1rem;
+    }
+
+    &__text_theme_white {
+        color: rgb(105, 105, 105);
+        font-weight: bold;
+        border-color: rgb(221, 221, 221);
+    }
+
+    &__icon {
+        width: 16px;
+        height: 16px;
+
+        &_type_profile{
+            background-color: rgb(221, 221, 221);
+            border-radius: 15px;
+            cursor: pointer;
+        }
+    }
+
+    &__logo {
+        width: 48px;
+        height: 48px;
+    }
+
+    &__head {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+    }
 }
 
-.sidebar__text_theme_white{
-    color: rgb(67, 67, 67);
-    font-weight: bold;
-    border-color: rgb(221, 221, 221);
-}
-
-.sidebar__icon{
-    width: 16px;
-    height: 16px;
-}
-
-.sidebar__logo{
-    width: 48px;
-    height: 48px;
-}
-
-.sidebar__head{
-    display: flex;
-    align-items: center;
-}
-
-.tabs{
-    height: inherit;
+.tabs {
+    height: 70lvh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-top: 1.5rem;
+    padding: 1rem;
+
+    &_dist {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    &__element {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.6rem 1rem;
+        border-radius: 15px;
+        cursor: pointer;
+
+        &:hover {
+            color: rgb(31, 31, 31);
+            background-color: rgb(219, 219, 219);
+        }
+
+        &_is-selected {
+            color: rgb(255, 143, 0);
+            background-color: rgba(255, 145, 0, 0.121);
+        }
+
+        &_is-selected:hover {
+            color: rgb(255, 143, 0);
+            background-color: rgba(255, 145, 0, 0.121);
+        }
+
+    }
 }
 
-.tabs__element{
+.profile {
+    margin-top: 1rem;
     display: flex;
     align-items: center;
-    gap: 1rem;
+    justify-content: space-between;
     padding: 1rem;
+    
+    &__content{
+        display: flex;
+        gap: 1rem;
+    }
+
+    &__icon{
+        background-color: rgb(255, 143, 0);
+        width: 32px;
+        height: 32px;
+        border-radius: 5px;
+        padding: 0.5rem;
+    }
+
+    &__text{
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__placeholder{
+        font-weight: normal;
+        color: rgb(105, 105, 105);
+        font-size: 0.8rem;
+    }
+}
+
+.line {
+    border-top: solid rgb(221, 221, 221);
 }

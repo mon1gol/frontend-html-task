@@ -13,6 +13,8 @@ const routes = [
   { title: 'Messages', icon: 'envelope', path: '/messages' },
 ];
 
+const user = {title: 'John D.', icon: 'fa-solid fa-user', path: '/profile'};
+
 const bottomRoutes = [
   { title: 'Settings', icon: 'sliders', path: '/settings' },
   { title: 'Support', icon: 'phone-volume', path: '/support' },
@@ -21,7 +23,8 @@ const bottomRoutes = [
 const Sidebar = (props) => {
   const { color } = props;
   const [isOpened, setIsOpened] = useState(false);
-  const containerClassnames = classnames('sidebar', 'sidebar__text_theme_white', { opened: isOpened });
+  const containerClassnames = classnames('sidebar', 'sidebar_dist', 'sidebar__text_theme_white', { opened: isOpened });
+  const [currentPath, setCurrentPath] = useState('');
 
   const goToRoute = (path) => {
     console.log(`going to "${path}"`);
@@ -41,14 +44,15 @@ const Sidebar = (props) => {
         </div>
       </div>
       <div className='tabs'>
-        <div>
+        <div className='tabs_dist'>
           {
             routes.map(route => (
               <div
-                className='tabs__element'
+                className={`tabs__element ${route.path === currentPath ? 'tabs__element_is-selected' : ''}`}
                 key={route.title}
                 onClick={() => {
                   goToRoute(route.path);
+                  setCurrentPath(p => route.path)
                 }}
               >
                 <FontAwesomeIcon className='sidebar__icon' icon={route.icon} />
@@ -57,14 +61,15 @@ const Sidebar = (props) => {
             ))
           }
         </div>
-        <div>
+        <div className='tabs_dist'>
           {
             bottomRoutes.map(route => (
               <div
-                className='tabs__element'
+                className={`tabs__element ${route.path === currentPath ? 'tabs__element_is-selected' : ''}`}
                 key={route.title}
                 onClick={() => {
                   goToRoute(route.path);
+                  setCurrentPath(p => route.path)
                 }}
               >
                 <FontAwesomeIcon className='sidebar__icon' icon={route.icon} />
@@ -72,6 +77,22 @@ const Sidebar = (props) => {
               </div>
             ))
           }
+        </div>
+      </div>
+      <div>
+        <div className='line'></div>
+        <div className='profile'>
+          <div className='profile__content'>
+            <FontAwesomeIcon className='sidebar__icon profile__icon' icon={user.icon} />
+            <div className='profile__title profile__text'>
+              <span className='profile__placeholder'>User Account</span>
+              <span>{ user.title }</span>
+            </div>
+          </div>
+          <div className='sidebar__icon_type_profile'>
+            <FontAwesomeIcon className='sidebar__icon' icon={'fa-solid fa-arrow-up'} />
+            <FontAwesomeIcon className='sidebar__icon' icon={'fa-solid fa-arrow-down'} />
+          </div>
         </div>
       </div>
     </div>
