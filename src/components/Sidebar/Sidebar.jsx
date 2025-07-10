@@ -3,6 +3,7 @@ import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logo from '../../assets/logo.png';
 import PropTypes from 'prop-types';
+import { faUnderline } from '@fortawesome/free-solid-svg-icons';
 
 const routes = [
   { title: 'Home', icon: 'fas-solid fa-house', path: '/' },
@@ -13,7 +14,13 @@ const routes = [
   { title: 'Messages', icon: 'envelope', path: '/messages' },
 ];
 
-const user = {title: 'John D.', icon: 'fa-solid fa-user', path: '/profile'};
+const user = { 
+  title: 'John D.', 
+  fullName: 'John Doe', 
+  email: 'profile@wasd.com',
+  icon: 'fa-solid fa-user', 
+  path: '/profile'
+};
 
 const bottomRoutes = [
   { title: 'Settings', icon: 'sliders', path: '/settings' },
@@ -24,7 +31,9 @@ const Sidebar = (props) => {
   const { color } = props;
   const [isOpened, setIsOpened] = useState(false);
   const containerClassnames = classnames('sidebar', 'sidebar_dist', 'sidebar__text_theme_white', { opened: isOpened });
+
   const [currentPath, setCurrentPath] = useState('');
+  const [isModalActive, setModalActive] = useState(false);
 
   const goToRoute = (path) => {
     console.log(`going to "${path}"`);
@@ -35,63 +44,86 @@ const Sidebar = (props) => {
   };
 
   return (
-    <div className={containerClassnames}>
-      <div className='sidebar__head'>
-        <img className='sidebar__icon sidebar__logo' src={logo} alt="TensorFlow logo" />
-        <span>TensorFlow</span>
-        <div onClick={toggleSidebar}>
-          <FontAwesomeIcon className='sidebar__icon' icon={isOpened ? 'angle-left' : 'angle-right'} />
-        </div>
-      </div>
-      <div className='tabs'>
-        <div className='tabs_dist'>
-          {
-            routes.map(route => (
-              <div
-                className={`tabs__element ${route.path === currentPath ? 'tabs__element_is-selected' : ''}`}
-                key={route.title}
-                onClick={() => {
-                  goToRoute(route.path);
-                  setCurrentPath(p => route.path)
-                }}
-              >
-                <FontAwesomeIcon className='sidebar__icon' icon={route.icon} />
-                <span>{route.title}</span>
-              </div>
-            ))
-          }
-        </div>
-        <div className='tabs_dist'>
-          {
-            bottomRoutes.map(route => (
-              <div
-                className={`tabs__element ${route.path === currentPath ? 'tabs__element_is-selected' : ''}`}
-                key={route.title}
-                onClick={() => {
-                  goToRoute(route.path);
-                  setCurrentPath(p => route.path)
-                }}
-              >
-                <FontAwesomeIcon className='sidebar__icon' icon={route.icon} />
-                <span>{route.title}</span>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-      <div>
-        <div className='line'></div>
-        <div className='profile'>
-          <div className='profile__content'>
-            <FontAwesomeIcon className='sidebar__icon profile__icon' icon={user.icon} />
-            <div className='profile__title profile__text'>
-              <span className='profile__placeholder'>User Account</span>
-              <span>{ user.title }</span>
-            </div>
+    <div>
+      <div className={containerClassnames}>
+        <div className='sidebar__head'>
+          <img className='sidebar__icon sidebar__logo' src={logo} alt="TensorFlow logo" />
+          <span>TensorFlow</span>
+          <div onClick={toggleSidebar}>
+            <FontAwesomeIcon className='sidebar__icon' icon={isOpened ? 'angle-left' : 'angle-right'} />
           </div>
-          <div className='sidebar__icon_type_profile'>
-            <FontAwesomeIcon className='sidebar__icon' icon={'fa-solid fa-arrow-up'} />
-            <FontAwesomeIcon className='sidebar__icon' icon={'fa-solid fa-arrow-down'} />
+        </div>
+        <div className='tabs'>
+          <div className='tabs_dist'>
+            {
+              routes.map(route => (
+                <div
+                  className={`tabs__element ${route.path === currentPath ? 'tabs__element_is-selected' : ''}`}
+                  key={route.title}
+                  onClick={() => {
+                    goToRoute(route.path);
+                    setCurrentPath(p => route.path)
+                  }}
+                >
+                  <FontAwesomeIcon className='sidebar__icon' icon={route.icon} />
+                  <span>{route.title}</span>
+                </div>
+              ))
+            }
+          </div>
+          <div className='tabs_dist'>
+            {
+              bottomRoutes.map(route => (
+                <div
+                  className={`tabs__element ${route.path === currentPath ? 'tabs__element_is-selected' : ''}`}
+                  key={route.title}
+                  onClick={() => {
+                    goToRoute(route.path);
+                    setCurrentPath(p => route.path)
+                  }}
+                >
+                  <FontAwesomeIcon className='sidebar__icon' icon={route.icon} />
+                  <span>{route.title}</span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        <div>
+          <div className='line'></div>
+          <div className='profile'>
+            <div className='profile__content'>
+              <FontAwesomeIcon className='sidebar__icon profile__icon' icon={user.icon} />
+              <div className='profile__title profile__text'>
+                <span className='profile__placeholder'>User Account</span>
+                <span>{ user.title }</span>
+              </div>
+            </div>
+            <div onClick={() => { setModalActive(v => !v) }} className='sidebar__icon_type_profile'>
+              <FontAwesomeIcon className='sidebar__icon' icon={'fa-solid fa-arrow-up'} />
+              <FontAwesomeIcon className='sidebar__icon' icon={'fa-solid fa-arrow-down'} />
+            </div>
+
+          </div>
+          <div className={`${isModalActive ? 'modal' : 'modal_hidden'}`}>
+            <div>
+              <div className='profile__content profile__content_modal'>
+                <FontAwesomeIcon className='sidebar__icon profile__icon' icon={user.icon} />
+                <div className='profile__title profile__text'>
+                  <span>{ user.fullName }</span>
+                  <span className='profile__placeholder'>{ user.email }</span>
+                </div>
+              </div>
+              <div className='modal__menu'>
+                <span className='tabs__element'>View profile</span>
+                <span className='tabs__element'>Manage subscriptions</span>
+                <span className='tabs__element'>View history</span>
+              </div>
+              <div className='modal__footer'>
+                <span className='tabs__element'>Logout</span>
+              </div>              
+              <span className='profile__placeholder profile__placeholder_modal'>v 1.21.7 - <u>Terms and Conditions</u></span>
+            </div>
           </div>
         </div>
       </div>

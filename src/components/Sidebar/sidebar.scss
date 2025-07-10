@@ -1,9 +1,10 @@
 .sidebar {
     position: fixed;
-    height: 100dvh;
+    height: 95dvh;
     min-width: 20%;
     border: solid 3px;
     border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.05);
 
     &_dist {
         margin: 1rem;
@@ -79,7 +80,7 @@
 }
 
 .profile {
-    margin-top: 1rem;
+    margin-top: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -88,6 +89,10 @@
     &__content{
         display: flex;
         gap: 1rem;
+
+        &_modal{
+            margin-left: 1rem;
+        }
     }
 
     &__icon{
@@ -107,9 +112,40 @@
         font-weight: normal;
         color: rgb(105, 105, 105);
         font-size: 0.8rem;
+
+        &_modal{
+            padding-left: 1rem;
+        }
     }
+
 }
 
 .line {
     border-top: solid rgb(221, 221, 221);
+}
+
+.modal{
+    width: 100%;
+    position: absolute;
+    top: 310px;
+    left: 320px;
+    z-index: 20;
+    padding: 2rem 0.5rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.05);
+    border-radius: 15px;
+
+    &_hidden{
+        visibility: hidden;
+    }
+
+    &__menu{
+        margin: 1.5rem 0;
+        padding: 1rem 0;
+        border-top: 1px solid rgb(221, 221, 221);
+        border-bottom: 1px solid rgb(221, 221, 221);
+    }
+
+    &__footer{
+        
+    }
 }
