@@ -1,16 +1,17 @@
 .sidebar{
     position: fixed;
-    height: 100dvh;
-    width: 20%;
-}
-
-.sidebar_theme_white{
-
+    height: 95%;
+    min-width: 15%;
+    padding: 1rem;
+    margin: 1rem;
+    border: solid 3px;
+    border-radius: 15px;
 }
 
 .sidebar__text_theme_white{
     color: rgb(67, 67, 67);
     font-weight: bold;
+    border-color: rgb(221, 221, 221);
 }
 
 .sidebar__icon{
@@ -21,4 +22,23 @@
 .sidebar__logo{
     width: 48px;
     height: 48px;
+}
+
+.sidebar__head{
+    display: flex;
+    align-items: center;
+}
+
+.tabs{
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tabs__element{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
 }

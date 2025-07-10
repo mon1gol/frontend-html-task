@@ -33,42 +33,46 @@ const Sidebar = (props) => {
 
   return (
     <div className={containerClassnames}>
-      <div>
+      <div className='sidebar__head'>
         <img className='sidebar__icon sidebar__logo' src={logo} alt="TensorFlow logo" />
         <span>TensorFlow</span>
         <div onClick={toggleSidebar}>
           <FontAwesomeIcon className='sidebar__icon' icon={isOpened ? 'angle-left' : 'angle-right'} />
         </div>
       </div>
-      <div>
-        {
-          routes.map(route => (
-            <div
-              key={route.title}
-              onClick={() => {
-                goToRoute(route.path);
-              }}
-            >
-              <FontAwesomeIcon className='sidebar__icon' icon={route.icon} />
-              <span>{route.title}</span>
-            </div>
-          ))
-        }
-      </div>
-      <div>
-        {
-          bottomRoutes.map(route => (
-            <div
-              key={route.title}
-              onClick={() => {
-                goToRoute(route.path);
-              }}
-            >
-              <FontAwesomeIcon className='sidebar__icon' icon={route.icon} />
-              <span>{route.title}</span>
-            </div>
-          ))
-        }
+      <div className='tabs'>
+        <div>
+          {
+            routes.map(route => (
+              <div
+                className='tabs__element'
+                key={route.title}
+                onClick={() => {
+                  goToRoute(route.path);
+                }}
+              >
+                <FontAwesomeIcon className='sidebar__icon' icon={route.icon} />
+                <span>{route.title}</span>
+              </div>
+            ))
+          }
+        </div>
+        <div>
+          {
+            bottomRoutes.map(route => (
+              <div
+                className='tabs__element'
+                key={route.title}
+                onClick={() => {
+                  goToRoute(route.path);
+                }}
+              >
+                <FontAwesomeIcon className='sidebar__icon' icon={route.icon} />
+                <span>{route.title}</span>
+              </div>
+            ))
+          }
+        </div>
       </div>
     </div>
   );
