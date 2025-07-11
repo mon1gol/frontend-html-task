@@ -30,7 +30,7 @@ const bottomRoutes = [
 const Sidebar = (props) => {
   const { color } = props;
   const [isOpened, setIsOpened] = useState(false);
-  const containerClassnames = classnames('sidebar', 'sidebar_dist', 'sidebar__text_theme_white', { opened: isOpened });
+  const containerClassnames = classnames('sidebar', 'sidebar_dist', 'sidebar__text_theme_white',  {'sidebar_hidden': isOpened},  { opened: isOpened });
 
   const [currentPath, setCurrentPath] = useState('');
   const [isModalActive, setModalActive] = useState(false);
@@ -47,10 +47,12 @@ const Sidebar = (props) => {
     <div>
       <div className={containerClassnames}>
         <div className='sidebar__head'>
-          <img className='sidebar__icon sidebar__logo' src={logo} alt="TensorFlow logo" />
-          <span>TensorFlow</span>
+          <div className='sidebar__head_dist'>
+            <img className='sidebar__icon sidebar__logo sidebar__logo_dist' src={logo} alt="TensorFlow logo" />
+            <span>TensorFlow</span>
+          </div>
           <div onClick={toggleSidebar}>
-            <FontAwesomeIcon className='sidebar__icon' icon={isOpened ? 'angle-left' : 'angle-right'} />
+            <FontAwesomeIcon className={`sidebar__icon sidebar__icon_pointer ${isOpened ? 'arrow_right' : ''}`} icon={isOpened ? 'angle-left' : 'angle-right'} />
           </div>
         </div>
         <div className='tabs'>
